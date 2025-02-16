@@ -15,21 +15,34 @@ const FeedbackForm = () => {
         });
       };
       const handleSubmit = (event) => {
-        event.preventDefault();
-        const confirmationMessage = `
-          Name: ${formData.name}
-          Email: ${formData.email}
-          Feedback: ${formData.feedback}
-        `;
-        const isConfirmed = window.confirm(`Please confirm your details:\n\n${confirmationMessage}`);
-        if (isConfirmed) {
-          console.log('Submitting feedback:', formData);
-          setFormData({
-            name: '',
-            email: '',
-            feedback: ''
-          });
-          alert('Thank you for your valuable feedback!');
+        try {
+          event.preventDefault();
+          console.log('Form submitted');
+      
+          const confirmationMessage = `
+            Name: ${formData.name}
+            Email: ${formData.email}
+            Feedback: ${formData.feedback}
+          `;
+      
+          console.log('Showing confirmation dialog');
+          const isConfirmed = window.confirm(`Please confirm your details:\n\n${confirmationMessage}`);
+          
+          console.log('User confirmation:', isConfirmed);
+          if (isConfirmed) {
+            console.log('Submitting feedback:', formData);
+            setFormData({
+              name: '',
+              email: '',
+              feedback: ''
+            });
+            console.log('Showing thank you alert');
+            alert('Thank you for your valuable feedback!');
+          } else {
+            console.log('Submission cancelled by user');
+          }
+        } catch (error) {
+          console.error('An error occurred:', error);
         }
       };
   return (
